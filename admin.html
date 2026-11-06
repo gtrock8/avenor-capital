@@ -1,0 +1,506 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Avenor Capital</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #080f17;
+  color: #fff;
+}
+
+header {
+  background: #14212c;
+  border-bottom: 1px solid #35434e;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  color: #d5b36a;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.admin-tag {
+  color: #d5b36a;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+main {
+  max-width: 1200px;
+  margin: auto;
+  padding: 25px 16px;
+}
+
+h1 {
+  color: #d5b36a;
+  font-size: 25px;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #aab5bf;
+  font-size: 14px;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.warning {
+  border: 1px solid #8a7041;
+  background: #201c14;
+  color: #e6d3a5;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
+  margin-bottom: 25px;
+}
+
+.card, .panel {
+  background: #14212c;
+  border: 1px solid #35434e;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.card p {
+  color: #aab5bf;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.card h2 {
+  color: #d5b36a;
+  font-size: 25px;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+}
+
+nav button {
+  background: #14212c;
+  border: 1px solid #46535d;
+  color: #dce2e7;
+  padding: 12px 15px;
+  border-radius: 6px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+nav button.active {
+  background: #d5b36a;
+  color: #101820;
+  border-color: #d5b36a;
+}
+
+.panel {
+  margin-bottom: 20px;
+}
+
+.panel h2 {
+  color: #d5b36a;
+  font-size: 19px;
+  margin-bottom: 17px;
+}
+
+.item {
+  padding: 15px 0;
+  border-bottom: 1px solid #35434e;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.item p {
+  color: #aab5bf;
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 5px 0;
+}
+
+.status {
+  color: #e0c77f;
+  font-size: 12px;
+  margin: 7px 0;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.actions button {
+  padding: 9px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.approve {
+  background: #d5b36a;
+  color: #101820;
+}
+
+.reject {
+  background: #713b3b;
+  color: white;
+}
+
+.notice {
+  color: #9ba7b1;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+.empty {
+  color: #aab5bf;
+  font-size: 13px;
+  padding: 15px 0;
+}
+
+footer {
+  text-align: center;
+  color: #788692;
+  padding: 25px;
+  font-size: 12px;
+}
+
+@media (min-width: 700px) {
+  .stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <div class="brand">AVENOR CAPITAL</div>
+    <div class="admin-tag">PRIVATE ADMINISTRATION · DEMO</div>
+  </div>
+  <div class="notice">Administrator Preview</div>
+</header>
+
+<main>
+
+<h1>Administrator Dashboard</h1>
+
+<p class="subtitle">
+Welcome to your Avenor Capital management centre.
+Manage demonstration members, requests and verification records.
+</p>
+
+<div class="warning">
+  DEMONSTRATION MODE: All balances, members and transactions on
+  this page are sample data. Approval actions change only this
+  browser's temporary display. This page has no secure login,
+  database or real payment connection. Do not enter real customer
+  information or identity documents.
+</div>
+
+<div class="stats">
+  <div class="card">
+    <p>Total Members</p>
+    <h2 id="memberCount">3</h2>
+  </div>
+
+  <div class="card">
+    <p>Pending Deposits</p>
+    <h2 id="depositCount">1</h2>
+  </div>
+
+  <div class="card">
+    <p>Pending Withdrawals</p>
+    <h2 id="withdrawalCount">1</h2>
+  </div>
+
+  <div class="card">
+    <p>Pending KYC</p>
+    <h2 id="kycCount">1</h2>
+  </div>
+</div>
+
+<nav>
+  <button class="active" onclick="showSection('overview',this)">Overview</button>
+  <button onclick="showSection('members',this)">Members</button>
+  <button onclick="showSection('deposits',this)">Deposits</button>
+  <button onclick="showSection('withdrawals',this)">Withdrawals</button>
+  <button onclick="showSection('kyc',this)">KYC</button>
+  <button onclick="showSection('transactions',this)">Transactions</button>
+</nav>
+
+<section id="overview" class="section active">
+  <div class="panel">
+    <h2>Platform Overview</h2>
+    <p class="notice">
+      Your private administration centre is ready for demonstration.
+      Use the navigation above to review each management section.
+    </p>
+  </div>
+
+  <div class="panel">
+    <h2>Recent Activity</h2>
+    <div id="activity">
+      <p class="notice">Demo records will appear here when you approve or reject requests.</p>
+    </div>
+  </div>
+</section>
+
+<section id="members" class="section">
+  <div class="panel">
+    <h2>Registered Members</h2>
+
+    <div class="item">
+      <strong>Daniel Morgan</strong>
+      <p>Member ID: AV001</p>
+      <p>Account: Active (Demo)</p>
+    </div>
+
+    <div class="item">
+      <strong>Sarah Williams</strong>
+      <p>Member ID: AV002</p>
+      <p>Account: Active (Demo)</p>
+    </div>
+
+    <div class="item">
+      <strong>Michael James</strong>
+      <p>Member ID: AV003</p>
+      <p>Account: Pending Verification (Demo)</p>
+    </div>
+  </div>
+</section>
+
+<section id="deposits" class="section">
+  <div class="panel">
+    <h2>Deposit Requests</h2>
+
+    <div id="depositList"></div>
+  </div>
+</section>
+
+<section id="withdrawals" class="section">
+  <div class="panel">
+    <h2>Withdrawal Requests</h2>
+
+    <div id="withdrawalList"></div>
+  </div>
+</section>
+
+<section id="kyc" class="section">
+  <div class="panel">
+    <h2>Identity Verification Requests</h2>
+
+    <div id="kycList"></div>
+
+    <p class="notice">
+      This demonstration uses fictional verification records.
+      Real identity verification requires a secure, compliant
+      verification provider.
+    </p>
+  </div>
+</section>
+
+<section id="transactions" class="section">
+  <div class="panel">
+    <h2>Transaction History</h2>
+    <div id="transactionList">
+      <p class="empty">No completed demonstration transactions yet.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+© 2026 Avenor Capital. Private Administration Demo.
+</footer>
+
+<script>
+const records = {
+  deposits: [
+    {id:1,name:"Daniel Morgan",amount:"£50.00",status:"Pending"}
+  ],
+  withdrawals: [
+    {id:2,name:"Sarah Williams",amount:"£20.00",status:"Pending"}
+  ],
+  kyc: [
+    {id:3,name:"Michael James",status:"Pending"}
+  ]
+};
+
+let activity = [];
+
+function showSection(id,button) {
+  document.querySelectorAll(".section").forEach(section => {
+    section.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll("nav button").forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+}
+
+function renderList(type,elementId) {
+  const container = document.getElementById(elementId);
+  container.innerHTML = "";
+
+  if(records[type].length === 0) {
+    container.innerHTML = '<p class="empty">No pending requests.</p>';
+    return;
+  }
+
+  records[type].forEach(record => {
+    const item = document.createElement("div");
+    item.className = "item";
+
+    const details = document.createElement("div");
+    const name = document.createElement("strong");
+    name.textContent = record.name;
+    details.appendChild(name);
+
+    const info = document.createElement("p");
+    info.textContent = type === "kyc"
+      ? "Verification review request"
+      : "Amount: " + record.amount;
+    details.appendChild(info);
+
+    const status = document.createElement("div");
+    status.className = "status";
+    status.textContent = "Status: " + record.status;
+    details.appendChild(status);
+
+    item.appendChild(details);
+
+    if(record.status === "Pending") {
+      const actions = document.createElement("div");
+      actions.className = "actions";
+
+      ["Approve","Reject"].forEach(action => {
+        const button = document.createElement("button");
+        button.textContent = action;
+        button.className = action === "Approve" ? "approve" : "reject";
+        button.onclick = () => updateRecord(type,record.id,action);
+        actions.appendChild(button);
+      });
+
+      item.appendChild(actions);
+    }
+
+    container.appendChild(item);
+  });
+}
+
+function updateRecord(type,id,action) {
+  const record = records[type].find(item => item.id === id);
+
+  if(!record || record.status !== "Pending") return;
+
+  record.status = action === "Approve" ? "Approved (Demo)" : "Rejected (Demo)";
+
+  activity.unshift(type + ": " + record.name + " — " + record.status);
+
+  renderAll();
+}
+
+function renderAll() {
+  renderList("deposits","depositList");
+  renderList("withdrawals","withdrawalList");
+  renderList("kyc","kycList");
+
+  document.getElementById("depositCount").textContent =
+    records.deposits.filter(r => r.status === "Pending").length;
+
+  document.getElementById("withdrawalCount").textContent =
+    records.withdrawals.filter(r => r.status === "Pending").length;
+
+  document.getElementById("kycCount").textContent =
+    records.kyc.filter(r => r.status === "Pending").length;
+
+  const activityBox = document.getElementById("activity");
+  activityBox.innerHTML = "";
+
+  if(activity.length === 0) {
+    activityBox.innerHTML =
+      '<p class="notice">No recent activity.</p>';
+  } else {
+    activity.forEach(entry => {
+      const p = document.createElement("p");
+      p.className = "notice";
+      p.textContent = entry;
+      activityBox.appendChild(p);
+    });
+  }
+
+  const transactions = document.getElementById("transactionList");
+  transactions.innerHTML = "";
+
+  const completed = [
+    ...records.deposits,
+    ...records.withdrawals
+  ].filter(r => r.status !== "Pending");
+
+  if(completed.length === 0) {
+    transactions.innerHTML =
+      '<p class="empty">No completed demonstration transactions yet.</p>';
+  } else {
+    completed.forEach(record => {
+      const p = document.createElement("p");
+      p.className = "item";
+      p.textContent = record.name + " — " + record.amount +
+        " — " + record.status;
+      transactions.appendChild(p);
+    });
+  }
+}
+
+renderAll();
+</script>
+
+</body>
+</html>
