@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account | Avenor Capital</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #080f17;
+  color: white;
+  min-height: 100vh;
+  padding: 25px 16px;
+}
+
+.logo {
+  text-align: center;
+  color: #d5b36a;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 20px 0 35px;
+}
+
+.container {
+  max-width: 440px;
+  margin: auto;
+  background: #14212c;
+  border: 1px solid #35434e;
+  border-radius: 12px;
+  padding: 28px 22px;
+}
+
+h1 {
+  text-align: center;
+  color: #d5b36a;
+  font-size: 27px;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #b7c0c8;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 27px;
+}
+
+label {
+  display: block;
+  margin: 17px 0 8px;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  background: #09131d;
+  border: 1px solid #46535d;
+  border-radius: 6px;
+  color: white;
+  font-size: 15px;
+}
+
+input:focus {
+  outline: 1px solid #d5b36a;
+}
+
+.checkbox {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: #c2cbd2;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 20px 0;
+}
+
+.checkbox input {
+  width: auto;
+  margin-top: 3px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  background: #d5b36a;
+  border: none;
+  border-radius: 6px;
+  color: #111820;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login {
+  text-align: center;
+  margin-top: 23px;
+  font-size: 14px;
+  color: #c1c9d0;
+}
+
+a {
+  color: #d5b36a;
+  text-decoration: none;
+}
+
+.notice {
+  margin-top: 20px;
+  padding: 12px;
+  border: 1px solid #8a7041;
+  border-radius: 6px;
+  color: #e0d1ae;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+footer {
+  text-align: center;
+  color: #89939b;
+  font-size: 12px;
+  margin: 30px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="logo">AVENOR CAPITAL</div>
+
+<div class="container">
+
+<h1>Create Account</h1>
+
+<p class="subtitle">
+Join Avenor Capital and explore our
+financial platform.
+</p>
+
+<form id="registerForm">
+
+<label for="firstName">First Name</label>
+<input type="text" id="firstName"
+placeholder="Enter your first name" required>
+
+<label for="lastName">Last Name</label>
+<input type="text" id="lastName"
+placeholder="Enter your last name" required>
+
+<label for="email">Email Address</label>
+<input type="email" id="email"
+placeholder="Enter your email address" required>
+
+<label for="password">Password</label>
+<input type="password" id="password"
+placeholder="Create a password"
+minlength="12" required>
+
+<label for="confirmPassword">Confirm Password</label>
+<input type="password" id="confirmPassword"
+placeholder="Confirm your password"
+minlength="12" required>
+
+<div class="checkbox">
+<input type="checkbox" id="terms" required>
+<label for="terms" style="margin:0">
+I agree to read and accept the platform's
+terms and privacy policy.
+</label>
+</div>
+
+<button type="submit" id="submitButton" disabled>
+Registration Coming Soon
+</button>
+
+</form>
+
+<div class="notice">
+Registration is not yet open. Account creation,
+identity verification and secure account services
+will become available only after the required
+systems and regulatory arrangements are in place.
+</div>
+
+<p class="login">
+Already have an account? <a href="login.html">Log in</a>
+</p>
+
+</div>
+
+<footer>
+© 2026 Avenor Capital. All rights reserved.
+</footer>
+
+</body>
+</html>
