@@ -69,17 +69,12 @@ input {
   font-size: 15px;
 }
 
-input:focus {
-  outline: 1px solid #d5b36a;
-}
-
 .checkbox {
   display: flex;
   gap: 10px;
   align-items: flex-start;
   color: #c2cbd2;
   font-size: 13px;
-  line-height: 1.5;
   margin: 20px 0;
 }
 
@@ -117,14 +112,12 @@ a {
   text-decoration: none;
 }
 
-.notice {
-  margin-top: 20px;
-  padding: 12px;
-  border: 1px solid #8a7041;
-  border-radius: 6px;
-  color: #e0d1ae;
-  font-size: 12px;
-  line-height: 1.5;
+#message {
+  margin-top: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+  overflow-wrap: anywhere;
 }
 
 footer {
@@ -145,8 +138,7 @@ footer {
 <h1>Create Account</h1>
 
 <p class="subtitle">
-Join Avenor Capital and explore our
-financial platform.
+Join Avenor Capital and explore our financial platform.
 </p>
 
 <form id="registerForm">
@@ -161,7 +153,8 @@ placeholder="Enter your last name" required>
 
 <label for="email">Email Address</label>
 <input type="email" id="email"
-placeholder="Enter your email address" required>
+placeholder="Enter your email address"
+autocomplete="email" required>
 
 <label for="password">Password</label>
 <input type="password" id="password"
@@ -181,21 +174,17 @@ terms and privacy policy.
 </label>
 </div>
 
-<button type="submit" id="submitButton" disabled>
-Registration Coming Soon
+<button type="submit" id="submitButton">
+Create Account
 </button>
+
+<p id="message" role="status" aria-live="polite"></p>
 
 </form>
 
-<div class="notice">
-Registration is not yet open. Account creation,
-identity verification and secure account services
-will become available only after the required
-systems and regulatory arrangements are in place.
-</div>
-
 <p class="login">
-Already have an account? <a href="login.html">Log in</a>
+Already have an account?
+<a href="login.html">Log in</a>
 </p>
 
 </div>
@@ -204,5 +193,91 @@ Already have an account? <a href="login.html">Log in</a>
 © 2026 Avenor Capital. All rights reserved.
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL =
+"https://prgshfinifoxbzpaosax.supabase.co";
+
+// Replace this placeholder with your Supabase Publishable Key.
+const SUPABASE_KEY =
+"PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+const form = document.getElementById("registerForm");
+const message = document.getElementById("message");
+const button = document.getElementById("submitButton");
+
+form.addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const firstName =
+    document.getElementById("firstName").value.trim();
+
+  const lastName =
+    document.getElementById("lastName").value.trim();
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const confirmPassword =
+    document.getElementById("confirmPassword").value;
+
+  if (password !== confirmPassword) {
+    message.textContent = "Your passwords do not match.";
+    return;
+  }
+
+  if (password.length < 12) {
+    message.textContent =
+      "Your password must contain at least 12 characters.";
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Creating account...";
+  message.textContent = "";
+
+  try {
+    const { data, error } =
+      await supabaseClient.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            first_name: firstName,
+            last_name: lastName
+          },
+          emailRedirectTo:
+            "https://gtrock8.github.io/avenor-capital/login.html"
+        }
+      });
+
+    if (error) throw error;
+
+    message.textContent =
+      "Your registration request was successful. Please check your email for confirmation before logging in.";
+
+    form.reset();
+
+  } catch (error) {
+    message.textContent =
+      "Registration failed: " + error.message;
+
+  } finally {
+    button.disabled = false;
+    button.textContent = "Create Account";
+  }
+});
+</script>
+
 </body>
 </html>
+
