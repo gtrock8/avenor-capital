@@ -181,6 +181,43 @@ Don't have an account?
 <footer>
 © 2026 Avenor Capital. All rights reserved.
 </footer>
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
+const supabase = createClient(
+  'https://prgshfinifoxbzpaosax.supabase.co',
+  'sb_publishable_L7k_5JrCT9VWmyILzXiI0w_niuJQAwq'
+);
+
+const form = document.getElementById('loginForm');
+const message = document.querySelector('.notice');
+const button = document.getElementById('loginButton');
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+
+  button.disabled = true;
+  button.textContent = 'Signing in...';
+  message.textContent = 'Signing in...';
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
+
+  if (error) {
+    message.textContent = error.message;
+    button.disabled = false;
+    button.textContent = 'Login';
+    return;
+  }
+
+  message.textContent = 'Login successful. You are signed in.';
+  button.textContent = 'Logged in';
+});
+</script>
 </body>
 </html>
